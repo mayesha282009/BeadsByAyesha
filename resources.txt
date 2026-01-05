@@ -1,0 +1,4 @@
+text-[#ae7d5b]
+text-[#fdf8ef]
+
+bg-[#ae7d5b]

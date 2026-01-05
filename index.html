@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Beads by Ayesha | Handmade Jewelry</title> 
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: 'rgb(119, 149, 163)',
+                            darkBlue: 'rgb(79, 99, 109)',
+                            gold: 'rgb(199, 181, 111)',
+                            pink: 'rgb(234, 194, 218)',
+                            dark: 'rgb(40, 50, 54)',
+                            light: 'rgb(249, 250, 251)',
+                            gray: 'rgb(114, 114, 114)',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"RoxboroughCF"', 'serif'],
+                        sans: ['"RoxboroughCF"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            background-color: #FAFAFA;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .product-page-transition {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- Inline Icons ---
+        const IconBase = ({ children, className, ...props }) => (
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className={className}
+                {...props}
+            >
+                {children}
+            </svg>
+        );
+
+        const ShoppingBag = (props) => (
+            <IconBase {...props}>
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                <path d="M3 6h18" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+            </IconBase>
+        );
+
+        const Menu = (props) => (
+            <IconBase {...props}>
+                <line x1="4" x2="20" y1="12" y2="12" />
+                <line x1="4" x2="20" y1="6" y2="6" />
+                <line x1="4" x2="20" y1="18" y2="18" />
+            </IconBase>
+        );
+
+        const X = (props) => (
+            <IconBase {...props}>
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+            </IconBase>
+        );
+
+        const Heart = (props) => (
+            <IconBase {...props}>
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+            </IconBase>
+        );
+
+        const Star = (props) => (
+            <IconBase {...props}>
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </IconBase>
+        );
+
+        const Instagram = (props) => (
+            <IconBase {...props}>
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+            </IconBase>
+        );
+
+        const Facebook = (props) => (
+            <IconBase {...props}>
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+            </IconBase>
+        );
+
+        const Mail = (props) => (
+            <IconBase {...props}>
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </IconBase>
+        );
+
+        const ArrowRight = (props) => (
+            <IconBase {...props}>
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+            </IconBase>
+        );
+
+        const Check = (props) => (
+            <IconBase {...props}>
+                <path d="M20 6 9 17l-5-5" />
+            </IconBase>
+        );
+
+        const ArrowLeft = (props) => (
+            <IconBase {...props}>
+                <path d="M19 12H5" />
+                <path d="m12 19-7-7 7-7" />
+            </IconBase>
+        );
+
+        // Mock Data
+        const products = [
+            { id: 1, name: "Ocean Breeze Bracelet", price: 25.00, category: "Bracelets", image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=800", tag: "Best Seller" },
+            { id: 2, name: "Golden Hour Necklace", price: 45.00, category: "Necklaces", image: "https://images.unsplash.com/photo-1599643478518-17488fbbcd75?auto=format&fit=crop&q=80&w=800", tag: "New" },
+            { id: 3, name: "Rose Quartz Anklet", price: 22.00, category: "Anklets", image: "https://images.unsplash.com/photo-1602751584552-8ba420552259?auto=format&fit=crop&q=80&w=800", tag: null },
+            { id: 4, name: "Midnight Pearl Set", price: 60.00, category: "Sets", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=800", tag: "Limited" },
+            { id: 5, name: "Emerald Beaded Drop", price: 30.00, category: "Earrings", image: "https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?auto=format&fit=crop&q=80&w=800", tag: null },
+            { id: 6, name: "Sunset Clay Choker", price: 35.00, category: "Necklaces", image: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&q=80&w=800", tag: "Trending" },
+            { id: 7, name: "Crystal Bead Earrings", price: 28.00, category: "Earrings", image: "https://images.unsplash.com/photo-1596703923338-48f1c07e4f2e?auto=format&fit=crop&q=80&w=800", tag: "New" },
+            { id: 8, name: "Boho Beaded Necklace", price: 52.00, category: "Necklaces", image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=800", tag: null },
+            { id: 9, name: "Rainbow Bead Bracelet", price: 32.00, category: "Bracelets", image: "https://images.unsplash.com/photo-1621184455862-c637df0d1d84?auto=format&fit=crop&q=80&w=800", tag: "Best Seller" },
+            { id: 10, name: "Pearl Drop Earrings", price: 38.00, category: "Earrings", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=800", tag: "Limited" },
+            { id: 11, name: "Gemstone Anklet", price: 27.00, category: "Anklets", image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&q=80&w=800", tag: null },
+            { id: 12, name: "Gold Bead Set", price: 75.00, category: "Sets", image: "https://images.unsplash.com/photo-1599643478518-17488fbbcd75?auto=format&fit=crop&q=80&w=800", tag: "New" },
+        ];
+
+        const testimonials = [
+            { id: 1, name: " ", text: "The designs are creative and versatile, perfect for both school and special events. I love them!", rating: 5 },
+            { id: 2, name: "", text: "The products are very intricate and don't disappoint! I would definitely come back for more.", rating: 5 },
+            { id: 3, name: "", text: "The jewlery is handmade with so much care, every piece looks beautiful and unique.", rating: 5 },
+        ];
+
+        // --- Components ---
+
+        const Navbar = ({ cartCount, onMenuClick, onHomeClick, onShopClick, currentPage }) => (
+            <nav className="fixed w-full z-50 bg-[#ae7d5b] transition-all duration-300">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex justify-between items-center h-20">
+                        {/* Mobile Menu Button */}
+                        <div className="flex items-center md:hidden">
+                            <button onClick={onMenuClick} className="p-2 rounded-md text-brand-dark hover:text-brand-blue">
+                                <Menu className="h-6 w-6" />
+                            </button>
+                        </div>
+
+                        {/* Logo */}
+                        <div className="flex-shrink-0 flex items-center justify-center flex-1 md:flex-none md:justify-start">
+                            <button 
+                                onClick={onHomeClick}
+                                className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-brand-dark hover:text-brand-blue transition-colors"
+                            >
+                                Beads<span className="text-brand-blue">by</span>Ayesha
+                            </button>
+                        </div>
+
+                        {/* Desktop Navigation */}
+                        <div className="hidden md:flex space-x-8 items-center">
+                            <button 
+                                onClick={onHomeClick}
+                                className={`${currentPage === 'home' ? 'text-brand-blue' : 'text-gray-600'} hover:text-brand-blue transition-colors font-medium text-sm tracking-wide uppercase`}
+                            >
+                                Home
+                            </button>
+                            <button 
+                                onClick={onShopClick}
+                                className={`${currentPage === 'products' ? 'text-brand-blue' : 'text-gray-600'} hover:text-brand-blue transition-colors font-medium text-sm tracking-wide uppercase`}
+                            >
+                                Shop
+                            </button>
+                            {currentPage === 'home' && (
+                                <>
+                                    <a href="#about" className="text-gray-600 hover:text-brand-blue transition-colors font-medium text-sm tracking-wide uppercase">About</a>
+                                    <a href="#contact" className="text-gray-600 hover:text-brand-blue transition-colors font-medium text-sm tracking-wide uppercase">Contact</a>
+                                </>
+                            )}
+                        </div>
+
+                        {/* Icons */}
+                        <div className="flex items-center space-x-4">
+                            <button className="p-2 text-gray-400 hover:text-brand-pink transition-colors">
+                                <Heart className="h-6 w-6" />
+                            </button>
+                            <button className="p-2 text-gray-600 hover:text-brand-blue transition-colors relative">
+                                <ShoppingBag className="h-6 w-6" />
+                                {cartCount > 0 && (
+                                    <span className="absolute top-1 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-brand-gold rounded-full">
+                                        {cartCount}
+                                    </span>
+                                )}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        );
+
+        const MobileMenu = ({ isOpen, onClose, onHomeClick, onShopClick, currentPage }) => (
+            <div className={`fixed inset-0 z-50 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out md:hidden`}>
+                <div className="absolute inset-0 bg-black/50" onClick={onClose}></div>
+                <div className="relative bg-white h-full w-4/5 shadow-xl flex flex-col p-6">
+                    <div className="flex justify-between items-center mb-8">
+                        <span className="font-serif text-xl font-bold">Menu</span>
+                        <button onClick={onClose}><X className="h-6 w-6 text-gray-500" /></button>
+                    </div>
+                    <nav className="flex flex-col space-y-6">
+                        <button 
+                            onClick={() => { onHomeClick(); onClose(); }} 
+                            className="text-lg font-medium text-gray-800 text-left"
+                        >
+                            Home
+                        </button>
+                        <button 
+                            onClick={() => { onShopClick(); onClose(); }} 
+                            className="text-lg font-medium text-gray-800 text-left"
+                        >
+                            Shop Collections
+                        </button>
+                        {currentPage === 'home' && (
+                            <>
+                                <a href="#about" onClick={onClose} className="text-lg font-medium text-gray-800">Our Story</a>
+                                <a href="#contact" onClick={onClose} className="text-lg font-medium text-gray-800">Contact Us</a>
+                            </>
+                        )}
+                    </nav>
+                </div>
+            </div>
+        );
+
+        const ProductCard = ({ product, addToCart }) => (
+            <div className="group relative bg-white">
+                <div className="aspect-[1/1] w-full overflow-hidden bg-gray-200 relative">
+                    {product.tag && (
+                        <span className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur text-brand-dark text-xs font-bold px-3 py-1 uppercase tracking-wider">
+                            {product.tag}
+                        </span>
+                    )}
+                    <img
+                        src={product.image}
+                        alt={product.name}
+                        className="h-full w-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+                    
+                    {/* Quick Add Button */}
+                    <button 
+                        onClick={() => addToCart(product)}
+                        className="absolute bottom-0 left-0 right-0 bg-white text-brand-dark py-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 font-medium uppercase text-sm tracking-wide border-t border-gray-100 flex justify-center items-center gap-2 hover:bg-brand-blue hover:text-white"
+                    >
+                        Add to Cart - ${product.price.toFixed(2)}
+                    </button>
+                </div>
+                <div className="mt-4 flex justify-between px-2">
+                    <div>
+                        <h3 className="text-lg font-serif text-brand-dark">
+                            {product.name}
+                        </h3>
+                        <p className="mt-1 text-sm text-gray-500">{product.category}</p>
+                    </div>
+                    <p className="text-lg font-medium text-brand-blue">${product.price.toFixed(2)}</p>
+                </div>
+            </div>
+        );
+
+        // --- Main Pages ---
+
+        const HomePage = ({ addToCart, onViewAllProducts }) => (
+            <>
+                <Hero onShopClick={onViewAllProducts} />
+                <Features />
+                
+                {/* Shop Section */}
+                <section id="shop" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <span className="text-brand-blue font-bold tracking-widest text-xs uppercase mb-2 block"></span>
+                        <h2 className="text-3xl md:text-4xl text-[#ae7d5b] font-serif font-bold ">Featured Products</h2>
+                        <div className="h-1 w-20 bg-[#ae7d5b] mx-auto mt-6"></div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-8">
+                        {products.slice(0, 3).map(product => (
+                            <ProductCard key={product.id} product={product} addToCart={addToCart} />
+                        ))}
+                    </div>
+                    
+                    <div className="mt-20 text-center">
+                        <button 
+                            onClick={onViewAllProducts}
+                            className="px-10 py-4 bg-[#ae7d5b] text-[#fdf8ef] hover:bg-brand-dark hover:text-white transition-colors uppercase tracking-widest text-sm font-bold"
+                        >
+                            View All Products
+                        </button>
+                    </div>
+                </section>
+
+                <AboutSection />
+                
+                {/* Testimonials */}
+                <section className="bg-brand-blue/5 py-24">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                        <h2 className="text-3xl text-[#ae7d5b] font-serif font-bold mb-12">Customer Reviews</h2>
+                        <div className="h-1 w-20 bg-[#ae7d5b] mx-auto mt-6"></div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {testimonials.map(t => (
+                                <div key={t.id} className="bg-[#ae7d5b] p-8 shadow-sm border border-gray-100 relative">
+                                    <div className="flex justify-center mb-4 text-[#fdf8ef]">
+                                        {[...Array(t.rating)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
+                                    </div>
+                                    <p className="text-[#fdf8ef] italic mb-6">"{t.text}"</p>
+                                    <p className="font-bold text-sm uppercase tracking-wide">{t.name}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            </>
+        );
+
+        const ProductsPage = ({ addToCart, onBackToHome }) => (
+            <div className="min-h-screen bg-[#fdf8ef] product-page-transition">
+                {/* Header */}
+                <header className="bg-[#ae7d5b] text-[#fdf8ef] py-4">
+                    <div className="max-w-7xl mx-auto px-4">
+                        <div className="flex justify-between items-center">
+                            <h1 className="text-3xl font-serif font-bold">All Products</h1>
+                            <button 
+                                onClick={onBackToHome}
+                                className="text-lg hover:text-[#000000] transition-colors flex items-center gap-2"
+                            >
+                                <ArrowLeft className="w-5 h-5" />
+                                Back to Home
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <main className="max-w-7xl mx-auto px-4 py-8">
+                    {/* Filter Section */}
+                    <div className="mb-8">
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {['All', 'Bracelets', 'Necklaces', 'Earrings', 'Anklets', 'Sets'].map((category) => (
+                                <button
+                                    key={category}
+                                    className="px-4 py-2 rounded-full bg-white text-[#ae7d5b] border border-[#ae7d5b] hover:bg-[#ae7d5b] hover:text-[#fdf8ef] transition-colors"
+                                >
+                                    {category}
+                                </button>
+                            ))}
+                        </div>
+                        
+                        <div className="flex justify-between items-center">
+                            <p className="text-[#000000]">Showing {products.length} products</p>
+                            <select className="px-4 py-2 rounded border border-[#ae7d5b] bg-white text-[#000000]">
+                                <option>Sort by: Featured</option>
+                                <option>Price: Low to High</option>
+                                <option>Price: High to Low</option>
+                                <option>Newest First</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    {/* Products Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        {products.map((product) => (
+                            <div 
+                                key={product.id} 
+                                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                            >
+                                {/* Product Image */}
+                                <div className="h-64 overflow-hidden">
+                                    <img 
+                                        src={product.image} 
+                                        alt={product.name}
+                                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                    />
+                                </div>
+                                
+                                {/* Product Info */}
+                                <div className="p-4">
+                                    <div className="flex justify-between items-start mb-2">
+                                        <h3 className="text-lg font-semibold text-[#000000]">{product.name}</h3>
+                                        <span className="text-[#ae7d5b] font-bold">${product.price.toFixed(2)}</span>
+                                    </div>
+                                    
+                                    <p className="text-sm text-gray-600 mb-3">{product.category}</p>
+                                    
+                                    <div className="flex justify-between items-center">
+                                        {product.tag && (
+                                            <span className="px-3 py-1 text-xs rounded-full bg-[#fdf8ef] text-[#ae7d5b]">
+                                                {product.tag}
+                                            </span>
+                                        )}
+                                        
+                                        <button 
+                                            onClick={() => addToCart(product)}
+                                            className="px-4 py-2 bg-[#ae7d5b] text-[#fdf8ef] rounded hover:bg-[#000000] transition-colors"
+                                        >
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </main>
+            </div>
+        );
+
+        const Hero = ({ onShopClick }) => (
+            <section id="home" className="relative pt-20 h-[85vh] flex items-center justify-center overflow-hidden bg-[#F5F7F8]">
+                {/* Abstract Background Shapes */}
+                <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-blue/10 rounded-l-full translate-x-1/3"></div>
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl -translate-x-1/4 translate-y-1/4"></div>
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div className="space-y-6 text-center md:text-left fade-in">
+                            <span className="text-brand-blue font-bold tracking-widest text-sm uppercase">Handmade Jewelry</span>
+                            <h1 className="text-5xl md:text-7xl text-[#ae7d5b] font-serif font-bold">
+                                Wear Your Unique Story
+                            </h1>
+                            <p className="text-lg text-[#ae7d5b] max-w-lg mx-auto md:mx-0">
+                                Discover unique handmade beaded jewelry creations and add to your daily looks! 
+                                Handcrafted jewelry made to inspire and delight. Find your perfect piece today.
+                            </p>
+                            <div className="pt-4 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                                <button 
+                                    onClick={onShopClick}
+                                    className="px-8 py-4 bg-[#ae7d5b] text-white font-semibold rounded-none hover:bg-brand-darkBlue transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+                                >
+                                    SHOP NOW 
+                                </button>
+                            </div>
+                        </div>
+                        <div className="relative hidden md:block fade-in" style={{animationDelay: '0.2s'}}>
+                             <div className="relative w-full aspect-[4/5] rounded-t-[10rem] overflow-hidden shadow-2xl">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&q=80&w=800" 
+                                    alt="Woman wearing beaded jewelry" 
+                                    className="object-cover w-full h-full hover:scale-105 transition-transform duration-700"
+                                />
+                             </div>
+                             {/* Floating Card */}
+                             <div className="absolute bottom-8 -left-8  bg-[#ae7d5b] p-4 shadow-xl max-w-xs">
+                                <div className="flex items-center gap-3">
+                                    <div className="bg-brand-pink/20 p-2 rounded-full text-brand-dark">
+                                        <Star className="w-5 h-5 fill-current  text-[#fdf8ef] " />
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-sm text-[#fdf8ef]">Premium Quality</p>
+                                        <p className="text-xs text-gray-500"></p>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+
+        const Features = () => (
+            <section className="py-24 bg-white border-b border-gray-100">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                        <div className="p-6">
+                            <div className="mx-auto w-12 h-12 bg-[#ae7d5b] rounded-full text-[#ae7d5b] flex items-center justify-center mb-4 text-[#fdf8ef]">
+                                <Heart className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-lg font-bold text-[#ae7d5b] mb-2">Handmade Jewelry</h3>
+                            <p className=" text-[#ae7d5b]">Each piece is uniquely crafted with love and attention to detail.</p>
+                        </div>
+                        <div className="p-6">
+                            <div className="mx-auto w-12 h-12 bg-[#ae7d5b] rounded-full text-[#ae7d5b] flex items-center justify-center mb-4 text-[#fdf8ef]">
+                                <Star className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-lg font-bold text-[#ae7d5b] mb-2">Custom Designs</h3>
+                            <p className=" text-[#ae7d5b]">Personalized creations to match your unique style.</p>
+                        </div>
+                        <div className="p-6">
+                            <div className="mx-auto w-12 h-12  rounded-full bg-[#ae7d5b] text-[#ae7d5b] flex items-center justify-center mb-4 text-[#fdf8ef]">
+                                <Check className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-lg font-bold text-[#ae7d5b] mb-2">Fine Materials</h3>
+                            <p className=" text-[#ae7d5b]">Using only the finest beads and materials for lasting quality.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+
+        const AboutSection = () => (
+            <section id="about" className="py-24 bg-[#ae7d5b] ">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                        <div className="order-2 md:order-1">
+                            <div className="relative">
+                                <div className="absolute -inset-4 border-2 border-brand-gold opacity-30 translate-x-4 translate-y-4"></div>
+                                <img 
+                                    src="https://images.unsplash.com/photo-1506806950064-9d51829d5b77?auto=format&fit=crop&q=80&w=800" 
+                                    alt="Beading work in progress" 
+                                    className="relative w-full shadow-lg"
+                                />
+                            </div>
+                        </div>
+                        <div className="order-1 md:order-2">
+                            <h2 className="text-[#fdf8ef]text-3xl md:text-4xl font-serif font-bold mb-6">Behind the Beads</h2>
+                            <p className="text-[#fdf8ef] mb-6 leading-relaxed">
+                                Hi, I'm Ayesha! I am dedicated to providing top-notch service to my valued customers. I am committed 
+                                to delivering excellence and exceeding expectations in every piece I create. At Beads, customer satisfaction 
+                                and the quality of our jewelry designs are our top priorities.
+                            </p>
+                            <div className="flex items-center gap-10">
+                                <div className="h-px text-[#fdf8ef] w-12"></div>
+                                <span className="font-serif italic text-xl text-[#fdf8ef]">Ayesha</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+
+        const Footer = () => (
+            <footer id="contact" className="bg-[#ae7d5b] text-white pt-16 pb-8">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                        <div>
+                            <h3 className="font-serif text-2xl font-bold mb-4">Beads<span className="text-brand-blue">by</span>Ayesha</h3>
+                            <p className="text-[#fdf8ef] text-sm mb-6 max-w-xs">
+                        
+                            </p>
+                            <div className="flex space-x-4">
+                                <a href="#" className="text-[#fdf8ef] hover:text-brand-pink transition-colors"><Instagram className="w-5 h-5"/></a>
+                                <a href="#" className="text-[#fdf8ef] hover:text-brand-blue transition-colors"><Facebook className="w-5 h-5"/></a>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 className="text-lg font-bold mb-6">Quick Links</h4>
+                            <ul className="space-y-3 text-[#fdf8ef] text-sm">
+                                <li><a href="#home" className="hover:text-white transition-colors">Home</a></li>
+                                <li><a href="#shop" className="hover:text-white transition-colors">Shop All</a></li>
+                                <li><a href="#about" className="hover:text-white transition-colors">About</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className=" bg-[#fdf8ef]pt-8 text-center text-xs text-[#fdf8ef]">
+                        <p>&copy; 2026 Beads by Ayesha. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        );
+
+        const Notification = ({ show, message }) => (
+             <div className={`fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ${show ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                <div className="bg-brand-dark text-white px-6 py-3 shadow-lg flex items-center gap-3 rounded-full">
+                    <Check className="w-4 h-4 text-green-400" />
+                    <span className="text-sm font-medium">{message}</span>
+                </div>
+             </div>
+        );
+
+        // --- Main App Component ---
+        const App = () => {
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+            const [cartCount, setCartCount] = useState(0);
+            const [notification, setNotification] = useState({ show: false, message: '' });
+            const [currentPage, setCurrentPage] = useState('home');
+
+            const addToCart = (product) => {
+                setCartCount(prev => prev + 1);
+                showNotification(`Added ${product.name} to cart`);
+            };
+
+            const showNotification = (msg) => {
+                setNotification({ show: true, message: msg });
+                setTimeout(() => setNotification({ show: false, message: '' }), 3000);
+            };
+
+            const handleViewAllProducts = () => {
+                setCurrentPage('products');
+                window.scrollTo(0, 0);
+            };
+
+            const handleBackToHome = () => {
+                setCurrentPage('home');
+                window.scrollTo(0, 0);
+            };
+
+            return (
+                <div className="min-h-screen bg-white font-sans text-brand-dark">
+                    <Navbar 
+                        cartCount={cartCount} 
+                        onMenuClick={() => setMobileMenuOpen(true)}
+                        onHomeClick={handleBackToHome}
+                        onShopClick={handleViewAllProducts}
+                        currentPage={currentPage}
+                    />
+                    <MobileMenu 
+                        isOpen={mobileMenuOpen} 
+                        onClose={() => setMobileMenuOpen(false)}
+                        onHomeClick={handleBackToHome}
+                        onShopClick={handleViewAllProducts}
+                        currentPage={currentPage}
+                    />
+                    
+                    <main>
+                        {currentPage === 'home' ? (
+                            <HomePage 
+                                addToCart={addToCart} 
+                                onViewAllProducts={handleViewAllProducts}
+                            />
+                        ) : (
+                            <ProductsPage 
+                                addToCart={addToCart} 
+                                onBackToHome={handleBackToHome}
+                            />
+                        )}
+                    </main>
+
+                    {currentPage === 'home' && <Footer />}
+                    <Notification show={notification.show} message={notification.message} />
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
