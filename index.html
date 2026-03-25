@@ -168,20 +168,27 @@
         );
 
         // Mock Data
-        const products = [
-            { id: 1, name: "Ocean Breeze Bracelet", price: 25.00, category: "Bracelets", image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=800", tag: "Best Seller" },
-            { id: 2, name: "Golden Hour Necklace", price: 45.00, category: "Necklaces", image: "https://images.unsplash.com/photo-1599643478518-17488fbbcd75?auto=format&fit=crop&q=80&w=800", tag: "New" },
-            { id: 3, name: "Rose Quartz Anklet", price: 22.00, category: "Anklets", image: "https://images.unsplash.com/photo-1602751584552-8ba420552259?auto=format&fit=crop&q=80&w=800", tag: null },
-            { id: 4, name: "Midnight Pearl Set", price: 60.00, category: "Sets", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=800", tag: "Limited" },
-            { id: 5, name: "Emerald Beaded Drop", price: 30.00, category: "Earrings", image: "https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?auto=format&fit=crop&q=80&w=800", tag: null },
-            { id: 6, name: "Sunset Clay Choker", price: 35.00, category: "Necklaces", image: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&q=80&w=800", tag: "Trending" },
-            { id: 7, name: "Crystal Bead Earrings", price: 28.00, category: "Earrings", image: "https://images.unsplash.com/photo-1596703923338-48f1c07e4f2e?auto=format&fit=crop&q=80&w=800", tag: "New" },
-            { id: 8, name: "Boho Beaded Necklace", price: 52.00, category: "Necklaces", image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=800", tag: null },
-            { id: 9, name: "Rainbow Bead Bracelet", price: 32.00, category: "Bracelets", image: "https://images.unsplash.com/photo-1621184455862-c637df0d1d84?auto=format&fit=crop&q=80&w=800", tag: "Best Seller" },
-            { id: 10, name: "Pearl Drop Earrings", price: 38.00, category: "Earrings", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=800", tag: "Limited" },
-            { id: 11, name: "Gemstone Anklet", price: 27.00, category: "Anklets", image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&q=80&w=800", tag: null },
-            { id: 12, name: "Gold Bead Set", price: 75.00, category: "Sets", image: "https://images.unsplash.com/photo-1599643478518-17488fbbcd75?auto=format&fit=crop&q=80&w=800", tag: "New" },
-        ];
+const products = [
+    { id: 1, name: "Beaded Set", price: 12.99, category: "Sets", image: "/images/1.jpeg", tag: "New" },
+    { id: 2, name: "Pearl Beaded Earrings", price: 5.99, category: "Earrings", image: "/images/2.jpeg", tag: "New" },
+    { id: 3, name: "Beaded Earrings", price: 5.00, category: "Earrings", image: "/images/3.jpeg", tag: "" },
+    { id: 4, name: "Beaded Bracelet", price: 7.00, category: "Bracelet", image: "/images/4.jpeg", tag: "" },
+    { id: 5, name: "Beaded Necklace", price: 5.99, category: "Necklace", image: "/images/5.jpeg", tag: "" },
+    { id: 6, name: "Pearl Beaded Necklace", price: 8.99, category: "Necklace", image: "/images/6.jpeg", tag: "New" },
+    { id: 7, name: "Pearl Beaded Necklace", price: 6.99, category: "", image: "/images/7.jpeg", tag: "" },
+    { id: 8, name: "Charm Bracelet", price: 8.99, category: "Bracelet", image: "/images/8.jpeg", tag: "New" },
+    { id: 9, name: "Beaded Earrings", price: 4.99, category: "Earrings", image: "/images/9.jpeg", tag: "" },
+    { id: 10, name: "Beaded Earrings", price: 3.99, category: "Earrings", image: "/images/10.jpeg", tag: "" },
+    { id: 11, name: "Pearl & Gem Beaded Earrings", price: 10.99, category: "Earrings", image: "/images/11.jpeg", tag: "New" },
+    { id: 12, name: "Pearl & Gem Beaded Neckalce", price: 12.99, category: "Necklace", image: "/images/12.jpeg", tag: "New" },
+    { id: 13, name: "Pearl & Gem Beaded Bracelet", price: 9.99, category: "Bracelet", image: "/images/13.jpeg", tag: "New" },
+    { id: 14, name: "Beaded Earrings", price: 6.99, category: "Earrings", image: "/images/14.jpeg", tag: "" },
+    { id: 15, name: "Beaded Bracelet", price: 5.99, category: "Bracelet", image: "/images/15.jpeg", tag: "" },
+    { id: 16, name: "Beaded Necklace", price: 10.99, category: "Necklace", image: "/images/16.jpeg", tag: "" },
+    { id: 17, name: "Beaded Earrings", price: 5.99, category: "Earrings", image: "/images/17.jpeg", tag: "" },
+
+
+];
 
         const testimonials = [
             { id: 1, name: " ", text: "The designs are creative and versatile, perfect for both school and special events. I love them!", rating: 5 },
@@ -197,49 +204,49 @@
                     <div className="flex justify-between items-center h-20">
                         {/* Mobile Menu Button */}
                         <div className="flex items-center md:hidden">
-                            <button onClick={onMenuClick} className="p-2 rounded-md text-brand-dark hover:text-brand-blue">
+                            <button onClick={onMenuClick} className="p-2 rounded-md text-brand-dark ">
                                 <Menu className="h-6 w-6" />
                             </button>
                         </div>
 
                         {/* Logo */}
                         <div className="flex-shrink-0 flex items-center justify-center flex-1 md:flex-none md:justify-start">
-                            <button 
-                                onClick={onHomeClick}
-                                className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-brand-dark hover:text-brand-blue transition-colors"
-                            >
-                                Beads<span className="text-brand-blue">by</span>Ayesha
-                            </button>
-                        </div>
+    <button onClick={onHomeClick} className="flex items-center">
+        <img 
+            src="logo.png"   // <-- replace with your actual file path
+            alt="Beads by Ayesha Logo"
+            className="h-12 md:h-14 object-contain"
+        />
+    </button>
+</div>
 
                         {/* Desktop Navigation */}
                         <div className="hidden md:flex space-x-8 items-center">
                             <button 
                                 onClick={onHomeClick}
-                                className={`${currentPage === 'home' ? 'text-brand-blue' : 'text-gray-600'} hover:text-brand-blue transition-colors font-medium text-sm tracking-wide uppercase`}
+                                className={`${currentPage === 'home' ? 'text-[#fdf8ef]' : 'text-gray-600'} transition-colors font-medium text-sm tracking-wide uppercase`}
                             >
                                 Home
                             </button>
                             <button 
                                 onClick={onShopClick}
-                                className={`${currentPage === 'products' ? 'text-brand-blue' : 'text-gray-600'} hover:text-brand-blue transition-colors font-medium text-sm tracking-wide uppercase`}
+                                className={`${currentPage === 'products' ? 'text-[#fdf8ef]' : 'text-gray-600'}  transition-colors font-medium text-sm tracking-wide uppercase`}
                             >
                                 Shop
                             </button>
                             {currentPage === 'home' && (
                                 <>
-                                    <a href="#about" className="text-gray-600 hover:text-brand-blue transition-colors font-medium text-sm tracking-wide uppercase">About</a>
-                                    <a href="#contact" className="text-gray-600 hover:text-brand-blue transition-colors font-medium text-sm tracking-wide uppercase">Contact</a>
+                                  
                                 </>
                             )}
                         </div>
 
                         {/* Icons */}
                         <div className="flex items-center space-x-4">
-                            <button className="p-2 text-gray-400 hover:text-brand-pink transition-colors">
+                            <button className="p-2 text-[#fdf8ef]  transition-colors">
                                 <Heart className="h-6 w-6" />
                             </button>
-                            <button className="p-2 text-gray-600 hover:text-brand-blue transition-colors relative">
+                            <button className="p-2 text-[#fdf8ef]  transition-colors relative">
                                 <ShoppingBag className="h-6 w-6" />
                                 {cartCount > 0 && (
                                     <span className="absolute top-1 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-brand-gold rounded-full">
@@ -276,8 +283,6 @@
                         </button>
                         {currentPage === 'home' && (
                             <>
-                                <a href="#about" onClick={onClose} className="text-lg font-medium text-gray-800">Our Story</a>
-                                <a href="#contact" onClick={onClose} className="text-lg font-medium text-gray-800">Contact Us</a>
                             </>
                         )}
                     </nav>
@@ -328,7 +333,7 @@
                 <Features />
                 
                 {/* Shop Section */}
-                <section id="shop" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <section id="shop" className=" bg-[#fdf8ef] py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <span className="text-brand-blue font-bold tracking-widest text-xs uppercase mb-2 block"></span>
                         <h2 className="text-3xl md:text-4xl text-[#ae7d5b] font-serif font-bold ">Featured Products</h2>
@@ -353,24 +358,6 @@
 
                 <AboutSection />
                 
-                {/* Testimonials */}
-                <section className="bg-brand-blue/5 py-24">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                        <h2 className="text-3xl text-[#ae7d5b] font-serif font-bold mb-12">Customer Reviews</h2>
-                        <div className="h-1 w-20 bg-[#ae7d5b] mx-auto mt-6"></div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {testimonials.map(t => (
-                                <div key={t.id} className="bg-[#ae7d5b] p-8 shadow-sm border border-gray-100 relative">
-                                    <div className="flex justify-center mb-4 text-[#fdf8ef]">
-                                        {[...Array(t.rating)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
-                                    </div>
-                                    <p className="text-[#fdf8ef] italic mb-6">"{t.text}"</p>
-                                    <p className="font-bold text-sm uppercase tracking-wide">{t.name}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
             </>
         );
 
@@ -396,7 +383,7 @@
                     {/* Filter Section */}
                     <div className="mb-8">
                         <div className="flex flex-wrap gap-2 mb-4">
-                            {['All', 'Bracelets', 'Necklaces', 'Earrings', 'Anklets', 'Sets'].map((category) => (
+                            {['All', 'Bracelets', 'Necklaces', 'Earrings', 'Rings', 'Sets'].map((category) => (
                                 <button
                                     key={category}
                                     className="px-4 py-2 rounded-full bg-white text-[#ae7d5b] border border-[#ae7d5b] hover:bg-[#ae7d5b] hover:text-[#fdf8ef] transition-colors"
@@ -493,8 +480,8 @@
                         <div className="relative hidden md:block fade-in" style={{animationDelay: '0.2s'}}>
                              <div className="relative w-full aspect-[4/5] rounded-t-[10rem] overflow-hidden shadow-2xl">
                                 <img 
-                                    src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&q=80&w=800" 
-                                    alt="Woman wearing beaded jewelry" 
+                                    src="" 
+                                    alt="" 
                                     className="object-cover w-full h-full hover:scale-105 transition-transform duration-700"
                                 />
                              </div>
@@ -517,7 +504,7 @@
         );
 
         const Features = () => (
-            <section className="py-24 bg-white border-b border-gray-100">
+            <section className="py-24 bg-[#fdf8ef] border-b border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                         <div className="p-6">
@@ -547,28 +534,28 @@
         );
 
         const AboutSection = () => (
-            <section id="about" className="py-24 bg-[#ae7d5b] ">
+            <section id="about" className="py-24 bg-[#fdf8ef] ">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                         <div className="order-2 md:order-1">
                             <div className="relative">
                                 <div className="absolute -inset-4 border-2 border-brand-gold opacity-30 translate-x-4 translate-y-4"></div>
                                 <img 
-                                    src="https://images.unsplash.com/photo-1506806950064-9d51829d5b77?auto=format&fit=crop&q=80&w=800" 
+                                    src="logo2.png" 
                                     alt="Beading work in progress" 
-                                    className="relative w-full shadow-lg"
+                                    className="relative w-2/3 shadow-lg"
                                 />
                             </div>
                         </div>
                         <div className="order-1 md:order-2">
-                            <h2 className="text-[#fdf8ef]text-3xl md:text-4xl font-serif font-bold mb-6">Behind the Beads</h2>
-                            <p className="text-[#fdf8ef] mb-6 leading-relaxed">
+                            <h2 className="text-[#ae7d5b] text-3xl md:text-4xl font-serif font-bold mb-6">Behind the Beads</h2>
+                            <p className="text-[#ae7d5b] mb-6 leading-relaxed">
                                 Hi, I'm Ayesha! I am dedicated to providing top-notch service to my valued customers. I am committed 
                                 to delivering excellence and exceeding expectations in every piece I create. At Beads, customer satisfaction 
                                 and the quality of our jewelry designs are our top priorities.
                             </p>
                             <div className="flex items-center gap-10">
-                                <div className="h-px text-[#fdf8ef] w-12"></div>
+                                <div className="h-px text-[#ae7d5b] w-12"></div>
                                 <span className="font-serif italic text-xl text-[#fdf8ef]">Ayesha</span>
                             </div>
                         </div>
@@ -582,18 +569,17 @@
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
                         <div>
-                            <h3 className="font-serif text-2xl font-bold mb-4">Beads<span className="text-brand-blue">by</span>Ayesha</h3>
+                            <h3 className="font-serif text-2xl font-bold mb-4">Beads<span className="text-[#fdf8ef]">by</span>Ayesha</h3>
                             <p className="text-[#fdf8ef] text-sm mb-6 max-w-xs">
                         
                             </p>
                             <div className="flex space-x-4">
                                 <a href="#" className="text-[#fdf8ef] hover:text-brand-pink transition-colors"><Instagram className="w-5 h-5"/></a>
-                                <a href="#" className="text-[#fdf8ef] hover:text-brand-blue transition-colors"><Facebook className="w-5 h-5"/></a>
                             </div>
                         </div>
                         
                         <div>
-                            <h4 className="text-lg font-bold mb-6">Quick Links</h4>
+                            <h4 className="text-lg text-[#fdf8ef] font-bold mb-6">Quick Links</h4>
                             <ul className="space-y-3 text-[#fdf8ef] text-sm">
                                 <li><a href="#home" className="hover:text-white transition-colors">Home</a></li>
                                 <li><a href="#shop" className="hover:text-white transition-colors">Shop All</a></li>

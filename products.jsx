@@ -4,74 +4,141 @@ import { Link } from 'react-router-dom'; // or your router
 const ProductsPage = () => {
   // Sample product data
   const products = [
+  {
+    id: 1,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/1.jpeg',
+    description: ''
+  },
+  {
+    id: 2,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/2.jpeg',
+    description: ''
+  },
+  {
+    id: 3,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/3.jpeg',
+    description: ''
+  },
+  {
+    id: 4,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/4.jpeg',
+    description: ''
+  },
+  {
+    id: 5,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/5.jpeg',
+    description: ''
+  },
+  {
+    id: 6,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/6.jpeg',
+    description: ''
+  },
     {
-      id: 1,
-      name: 'Classic Wool Sweater',
-      price: '$89.99',
-      category: 'Sweaters',
-      image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400',
-      description: 'Premium wool sweater for all seasons'
-    },
+    id: 7,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/7.jpeg',
+    description: ''
+  },
     {
-      id: 2,
-      name: 'Denim Jacket',
-      price: '$129.99',
-      category: 'Jackets',
-      image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w-400',
-      description: 'Vintage style denim jacket'
-    },
+    id: 8,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/8.jpeg',
+    description: ''
+  },
     {
-      id: 3,
-      name: 'Linen Shirt',
-      price: '$59.99',
-      category: 'Shirts',
-      image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400',
-      description: 'Breathable linen shirt'
-    },
+    id: 9,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/9.jpeg',
+    description: ''
+  },
     {
-      id: 4,
-      name: 'Cotton Trousers',
-      price: '$79.99',
-      category: 'Pants',
-      image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=400',
-      description: 'Comfortable cotton trousers'
-    },
-    {
-      id: 5,
-      name: 'Leather Boots',
-      price: '$199.99',
-      category: 'Footwear',
-      image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400',
-      description: 'Premium leather boots'
-    },
-    {
-      id: 6,
-      name: 'Cashmere Scarf',
-      price: '$69.99',
-      category: 'Accessories',
-      image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400',
-      description: 'Luxury cashmere scarf'
-    },
-    {
-      id: 7,
-      name: 'Silk Dress',
-      price: '$159.99',
-      category: 'Dresses',
-      image: 'https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?w=400',
-      description: 'Elegant silk evening dress'
-    },
-    {
-      id: 8,
-      name: 'Winter Coat',
-      price: '$249.99',
-      category: 'Outerwear',
-      image: 'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?w=400',
-      description: 'Warm winter coat with insulation'
-    },
-  ];
+    id: 10,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/10.jpeg',
+    description: ''
+  },
+      {
+    id: 11,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/11.jpeg',
+    description: ''
+  },
+      {
+    id: 12,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/12.jpeg',
+    description: ''
+  },    {
+    id: 13,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/13.jpeg',
+    description: ''
+  },    {
+    id: 14,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/14.jpeg',
+    description: ''
+  },    {
+    id: 15,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/15.jpeg',
+    description: ''
+  },    {
+    id: 16,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/16.jpeg',
+    description: ''
+  },    {
+    id: 17,
+    name: '',
+    price: '',
+    category: '',
+    image: '/images/17.jpeg',
+    description: ''
+  },  
+];
 
   // Categories for filtering
-  const categories = ['All', 'Sweaters', 'Jackets', 'Shirts', 'Pants', 'Footwear', 'Accessories', 'Dresses', 'Outerwear'];
+  const categories = ['All','Bracelets','Necklaces', 'Earrings','Rings', 'Sets'];
 
   return (
     <div className="min-h-screen bg-[#fdf8ef]">
